@@ -122,12 +122,36 @@ module.exports = function(server) {
 		});
 	});
 
+	// LOGIN
+	// Retrieve the specified manager from the collection based on user/password
+	server.post('/login', (req, res, next) => {
+		if (!req.is('application/json')) {
+			return next(
+				new errors.InvalidContentError("Login: No 'application/json' data")
+			);
+		}
+
+		let data = req.body || {};
+
+		Manager.findOne({ user: data.user, password: data.password }, function(err, doc) {
+			if (err) {
+				console.error(err);
+				return next(
+					new errors.InvalidContentError(err.errors.name.message)
+				);
+			}
+
+			res.send(doc);
+			next();
+		});
+	});
+
 	// UPDATE
 	// Update the data of the selected manager, queried by id
 	server.put('/manager/:manager_id', (req, res, next) => {
 		if (!req.is('application/json')) {
 			return next(
-				new errors.InvalidContentError("Mmanager: No 'application/json' data")
+				new errors.InvalidContentError("Manager: No 'application/json' data")
 			);
 		}
 
