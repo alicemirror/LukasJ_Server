@@ -1,5 +1,5 @@
 /** 
-	\file projecs.js
+	\file project.js
 	\brief Database schema for the projects collection
 
 	Projects data can be accessed only by authorized users

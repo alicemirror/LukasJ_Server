@@ -1,6 +1,6 @@
 /** 
-	\file managers.js
-	\brief Database schema for the agers collection
+	\file manager.js
+	\brief Database schema for the managers collection
 
 	Project managers data can be accessed contains the sensible information
 	for user login and password.

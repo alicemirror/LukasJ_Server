@@ -3,10 +3,13 @@
 	\file index.js
 	\brief Main js page processing the REST API Request
 
-	When the server is accessed by the client this page processed
+	When the server is accessed by the client this page processes
 	the request and manage the server behaviour.
 	It is also called when the server starts creating the Mongo DB databas
 	connection.
+
+	\mainpage "Development Architecture"
+	\image html ./DevelopmentArchitecture.jpg"
 
 	\version 1.0.0
 	\date April 2018
