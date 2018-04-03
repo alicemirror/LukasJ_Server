@@ -1,0 +1,21 @@
+{
+  "name": "lukasj_api_db",
+  "version": "0.0.1",
+  "description": "Restify API and Mongo DB",
+  "main": "index.js",
+  "scripts": {
+    "lukasj": "lukasj_api"
+  },
+  "author": "Enrico Miglino",
+  "license": "ISC",
+  "dependencies": {
+    "bunyan-winston-adapter": "^0.2.0",
+    "lodash": "^4.17.5",
+    "mongoose": "^5.0.12",
+    "mongoose-api-query": "^0.1.1-pre",
+    "mongoose-createdmodified": "0.0.2",
+    "restify": "^7.1.0",
+    "restify-errors": "^6.0.0",
+    "winston": "^2.4.1"
+  }
+}
