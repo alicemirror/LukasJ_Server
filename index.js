@@ -19,9 +19,11 @@
 //! Configuration file defining the erver parameters, name, version etc.
 const config = require('./config');
 
+const jwt       = require('restify-jwt-community'); ///< Java Web Token module
 const restify = require('restify');					///< Module restify
 const mongoose = require('mongoose');				///< mongoose restify interface
-const restifyPlugins = require('restify-plugins');	///< nodes for restify plugins
+//const restifyPlugins = require('restify-plugins');	///< nodes for restify plugins
+const restifyPlugins = require('restify').plugins;	///< nodes for restify plugins
 
 /**
 	\brief Initialize Server
@@ -34,13 +36,19 @@ const server = restify.createServer({
 	version: config.version,
 });
 
-//! Implements the restify jsonBodyParser plugin for json format parameters mapping
+//! Restify plugin for parsing body calls
+server.use(restifyPlugins.bodyParser())
+
+// Authorization
+var jwtConfig = { secret: config.JWT_SECRET };
+
+//! Restify jsonBodyParser plugin for json format parameters mapping
 server.use(restifyPlugins.jsonBodyParser({ mapParams: true }));
-//! Implements the restify acceptParser plugin
+//! Restify acceptParser plugin
 server.use(restifyPlugins.acceptParser(server.acceptable));
-//! Implements the restify queryParser plugin
+//! Restify queryParser plugin
 server.use(restifyPlugins.queryParser({ mapParams: true }));
-//! Implements the restify fullResponse plugin setting the server response
+//! Restify fullResponse plugin setting the server response
 server.use(restifyPlugins.fullResponse());
 
 /**
@@ -65,6 +73,12 @@ server.listen(config.port, () => {
 	    console.error(err);
 	    process.exit(1);
 	});
+
+	// secure all routes, except /manager_noauth
+	server.use(jwt(jwtConfig).unless({
+		path: [ '/manager_noauth' ]
+	}));
+
 
 	db.once('open', () => {
 	    require('./routes')(server);
