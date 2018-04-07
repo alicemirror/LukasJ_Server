@@ -12,12 +12,16 @@ const MODULE_ID = 'api:manager';
 const logger    = require('../../utils/logger');
 const config    = require('../../config');
 const errors    = require('restify-errors');
+const Manager = require('../../models/manager');
 
 module.exports = (req, res, next) => {
-    logger.info('%s: request received', MODULE_ID);
-
-    res.send(resp);
-
-    logger.info('%s: response sent', MODULE_ID);
+		Manager.apiQuery(req.params, function(err, docs) {
+			if (err) {
+				console.error(err);
+				return next(new errors.InvalidContentError(err.errors.name.message));
+			}
+			res.send(docs);
+			next();
+		});
     return next();
 }

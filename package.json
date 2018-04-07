@@ -21,6 +21,8 @@
     "mongoose": "^5.0.13",
     "mongoose-api-query": "^0.1.1-pre",
     "mongoose-createdmodified": "0.0.2",
+    "mongoose-string-query": "^0.2.5",
+    "mongoose-timestamp": "^0.6.0",
     "restify": "^7.1.0",
     "restify-errors": "^6.0.0",
     "restify-jwt-community": "^1.0.3",

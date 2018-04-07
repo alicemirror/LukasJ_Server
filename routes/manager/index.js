@@ -10,7 +10,7 @@
 */
 'use strict'
 
-const config    = require('../../config')
+const config = require('../../config')
 
 module.exports = (server) => {
     server.post({ path: config.basePath('/manager'),
