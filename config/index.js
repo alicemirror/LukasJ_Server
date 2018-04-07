@@ -41,7 +41,7 @@
 const API_ROOT  = '/api'
 
 module.exports = {
-    LOG_LEVEL   : 'debug',
+    LOG_LEVEL   : 'info',
     PORT        : 3000,
 	db: {
 		uri: 'mongodb://127.0.0.1:27017/lukas',
@@ -53,7 +53,7 @@ module.exports = {
 	version: '0.0.2',
 
     //! key to generate JWT
-    JWT_SECRET  : 'jwt-secret-token-generator',
+    JWT_SECRET  : 'some-secret',
 
     /** 
 		This method will be used to build the route paths

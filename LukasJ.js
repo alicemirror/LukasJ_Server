@@ -35,7 +35,6 @@ logger.info('%s: initializing', MODULE_ID);
 
 var restify = require('restify');						///< Module restify
 var mongoose = require('mongoose');						///< mongoose restify interface
-//const restifyPlugins = require('restify-plugins');	///< nodes for restify plugins
 var restifyPlugins = require('restify').plugins;		///< nodes for restify plugins
 
 /**
@@ -56,8 +55,8 @@ server.use(restifyPlugins.bodyParser());
 var jwtConfig = { secret: config.JWT_SECRET };
 // secure all routes, except /manager_noauth
 server.use(jwt(jwtConfig).unless({
-	path: [ config.basePath('/register') ],
-	path: [ config.basePath('/login') ]
+	path: [ config.basePath('/register'),
+			config.basePath('/login') ]
 }));
 // Restify jsonBodyParser plugin for json format parameters mapping
 // server.use(restifyPlugins.jsonBodyParser({ mapParams: true }));

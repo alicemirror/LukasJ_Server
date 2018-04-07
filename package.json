@@ -2,12 +2,12 @@
   "name": "lukasj_api_db",
   "version": "0.0.2",
   "description": "Restify API and Mongo DB",
-  "main": "index.js",
+  "main": "LukasJ.js",
   "scripts": {
     "pretest": "eslint .",
     "test": "cross-env LOG_LEVEL=error mocha --recursive --reporter spec --exit ./test/specs/",
     "debug": "cross-env LOG_LEVEL=debug node index.js",
-    "start": "node index.js"
+    "start": "node LukasJ.js"
   },
   "repository": {
     "type": "git",

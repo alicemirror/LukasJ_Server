@@ -14,9 +14,9 @@
 module.exports = (server) => {
     // unprotected routes
     require('./register')(server)
-
+ 	require('./login')(server)
+ 
     // protected routes
     require('./manager')(server)
-    //require('./login')(server)
     //require('./project')(server)
 }
