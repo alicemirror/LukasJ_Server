@@ -8,22 +8,21 @@
     "test": "cross-env LOG_LEVEL=error mocha --recursive --reporter spec --exit ./test/specs/",
     "debug": "cross-env LOG_LEVEL=debug node index.js",
     "start": "node index.js"
-	},
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/alicemirror/LukasJ_Server"
-  	},
+  },
   "author": "Enrico Miglino",
   "license": "Apache",
   "dependencies": {
     "bunyan-winston-adapter": "^0.2.0",
     "lodash": "^4.17.5",
-    "mongoose": "^5.0.12",
+    "mongoose": "^5.0.13",
     "mongoose-api-query": "^0.1.1-pre",
     "mongoose-createdmodified": "0.0.2",
     "restify": "^7.1.0",
     "restify-errors": "^6.0.0",
-    "restify-jwt": "^0.4.0",
     "restify-jwt-community": "^1.0.3",
     "restify-plugins": "^1.6.0",
     "winston": "^2.4.1"

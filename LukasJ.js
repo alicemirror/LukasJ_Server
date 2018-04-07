@@ -24,12 +24,12 @@
 'use strict'
 
 //! Main module rest ID
-const MODULE_ID = 'app:main'
+var MODULE_ID = 'app:main'
 
-const config = require('./config');					///< Configuration file
-const logger = require('./utils/logger'); 			///< The server logger
+var config = require('./config');					///< Configuration file
+var logger = require('./utils/logger'); 			///< The server logger
 
-const jwt       = require('restify-jwt-community'); ///< Java Web Token module
+var jwt       = require('restify-jwt-community'); ///< Java Web Token module
 
 logger.info('%s: initializing', MODULE_ID);
 
@@ -56,16 +56,17 @@ server.use(restifyPlugins.bodyParser());
 var jwtConfig = { secret: config.JWT_SECRET };
 // secure all routes, except /manager_noauth
 server.use(jwt(jwtConfig).unless({
-	path: [ config.basePath('/register') ]
+	path: [ config.basePath('/register') ],
+	path: [ config.basePath('/login') ]
 }));
 // Restify jsonBodyParser plugin for json format parameters mapping
-server.use(restifyPlugins.jsonBodyParser({ mapParams: true }));
+// server.use(restifyPlugins.jsonBodyParser({ mapParams: true }));
 // Restify acceptParser plugin
-server.use(restifyPlugins.acceptParser(server.acceptable));
+// server.use(restifyPlugins.acceptParser(server.acceptable));
 // Restify queryParser plugin
 server.use(restifyPlugins.queryParser({ mapParams: true }));
-// Restify fullResponse plugin setting the server response
-server.use(restifyPlugins.fullResponse());
+
+server.use(restifyPlugins.bodyParser());
 
 /**
 	\brief Start Server, Connect to DB & Require Routes
@@ -78,25 +79,38 @@ server.use(restifyPlugins.fullResponse());
 	\todo Process a more reliable error messaging than the bare returned error condition
 	from the DB..	
 */
+
+// Routes
+require('./routes')(server)
+
+
+// server.listen(config.PORT)
 server.listen(config.PORT, () => {
 	// establish connection to mongodb
 	mongoose.Promise = global.Promise;
 	mongoose.connect(config.db.uri);
 
+	logger.info('connect(config.db.url)');
+
 	// Define the current db connection
 	var db = mongoose.connection;
 
+	logger.info('created db = mongoose.connection');
+
 	db.on('error', (err) => {
+		logger.info('Error establishing connection to DB');
 	    console.error(err);
 	    process.exit(1);
 	});
 
+	logger.info('NO Errors creating the connection to DB');
+
 	// Open the database connection and start the server
 	db.once('open', () => {
-	    require('./routes')(server);
-		logger.info('%s: ready. listening on PORT ', MODULE_ID, config.PORT);
-	    console.log(`Server ${config.name}\nInternal ver.${config.version}\nListening on port ${config.PORT}`);
+		logger.info('%s: ready.', MODULE_ID);
+		console.log(`Server ${config.name}\nInternal ver.${config.version}\nListening on port ${config.PORT}`);
 	});
 });
 
+module.exports = server
   

@@ -17,6 +17,9 @@ module.exports = (req, res, next) => {
     logger.info('%s: request received', MODULE_ID)
 
     let resp = {}
+
+	logger.info('Body request { name:%s, role:%s}', req.body.name, req.body.role);
+
     if (!req.body.name) {
         resp = new errors.BadRequestError('Field [name] missing')
     } else if (!req.body.role) {
@@ -27,9 +30,10 @@ module.exports = (req, res, next) => {
 
         // set all the input data as response and add the token
         resp = req.body
+		
         resp['token']   = token
 
-        logger.info('%s: token generated', MODULE_ID)
+        logger.info('%s: token generated', MODULE_ID);
     }
 
     res.send(resp)

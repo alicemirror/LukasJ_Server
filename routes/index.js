@@ -17,7 +17,6 @@ module.exports = (server) => {
 
     // protected routes
     require('./manager')(server)
-    require('./manager_noauth')(server)
     //require('./login')(server)
     //require('./project')(server)
 }
