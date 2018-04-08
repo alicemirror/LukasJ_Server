@@ -17,7 +17,15 @@
 	Known bugs: token is not generated correctly\n
 	Rest path prefix should be reviewed
 
-	\version 1.0.2
+	1.0.2 Release candidate\n
+	SOLVED: the endpoints now works under the /api path\n
+	SOLVED: JWT token generation bug has been solved due an internal bug of the
+	NodeJS JWT library. Updated NodeJS and NPM to version 5.x and recreated the
+	node_modules\n
+	Version has been tested with Postman. The full documentation is publicy available
+	at the following address: https://documenter.getpostman.com/view/4048873/lukasj-jwt/RVu4HASS
+	
+	\version 1.0.2 RC
 	\date April 2018
 	\author Enrico Miglino <enrico.miglino@gmail.com>
 */
